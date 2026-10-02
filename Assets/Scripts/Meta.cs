@@ -10,6 +10,7 @@ public class Meta : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            Debug.Log("El jugador ha llegado a la meta");
             panelVictoria.SetActive(true);
 
             EventSystem.current.SetSelectedGameObject(botonReiniciar);
