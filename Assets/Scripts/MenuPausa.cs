@@ -38,4 +38,32 @@ public class MenuPausa : MonoBehaviour
         Time.timeScale = 1f;
         panelPausa.SetActive(false);
     }
+
+    
+void OnEnable()
+{
+    // Escucha si se conecta o desconecta un mando
+    InputSystem.onDeviceChange += CambioMando;
+}
+
+void OnDisable()
+{
+    // Deja de escuchar cuando se desactiva
+    InputSystem.onDeviceChange -= CambioMando;
+}
+
+void CambioMando(InputDevice dispositivo, InputDeviceChange cambio)
+{
+    //Comprueba si es mando
+    if (dispositivo is Gamepad &&
+        cambio == InputDeviceChange.Removed)
+    {
+        // Pausa eljuego si no seta pausado
+        if (Time.timeScale != 0f)
+        {
+            Pausar();
+        }
+    }
+}
+
 }
